@@ -2,7 +2,7 @@
 
 What does it do?
 
-* allows you to build dashboards that surface data from graphite,
+* dashiki allows you to build dashboards that surface data from graphite,
   ganglia and other sources of time series data.
 
 ## How do I run it?
