@@ -1,0 +1,54 @@
+= haml :nav
+
+-## bootstrap support
+%script{:type=>"text/javascript", :src=>"/bootstrap/js/jquery.js"}
+%script{:type=>"text/javascript", :src=>"/bootstrap/js/bootstrap.min.js"}
+-## app js and config file
+%script{:type=>"text/javascript", :src=>"/js/Dash.js"}
+%script{:type=>"text/javascript", :src=>"/js/Dash.Project.js"}
+%script{:type=>"text/javascript", :src=>"/js/Dash.UI.js"}
+%script{:type=>"text/javascript", :src=>"/js/Dash.Stat.js"}
+%script{:type=>"text/javascript", :src=>"/js/Dash.Date.js"}
+%script{:type=>"text/javascript", :src=>"/js/Dash.Format.js"}
+%script{:type=>"text/javascript", :src=>"/js/Dash.Source.Graphite.js"}
+%script{:type=>"text/javascript", :src=>"/js/Dash.Source.Ganglia.js"}
+%script{:type=>"text/javascript", :src=>"/js/Dash.Source.Opscenter.js"}
+%script{:type=>"text/javascript", :src=>"/js/Dash.Source.Pingdom.js"}
+%script{:type=>"text/javascript", :src=>"/js/Dash.Source.Errplane.js"}
+%script{:type=>"text/javascript", :src=>"/js/Dash.Source.Test.js"}
+%script{:type=>"text/javascript", :src=>"/js/Dash.Source.Logstash.js"}
+%script{:type=>"text/javascript", :src=>"/js/Dash.Overview.js"}
+%script{:type=>"text/javascript", :src=>"/cfg/_defaults_.js"}
+
+.container#overview
+  - if @error
+    .alert.alert-error
+      = @error
+  .row#statboxes
+
+:javascript
+  var overview = new Dash.Overview({
+    from: '-1h',
+    element: '#overview',
+    classes: #{@classes}
+  });
+
+- @projects.each do |project|
+  %script{:type=>"text/javascript", :src=>"/cfg/#{project.join('/')}.js"}
+  :javascript
+    overview.project(Dash.stats_list.pop(), #{project});
+
+:javascript
+  new Dash.UI()
+    .setInterval(15000)
+    .playPause('#playpause', function(play) {
+      play && overview.update();
+    })
+    .refresh('#refresh', function() {
+      overview.update();
+    })
+    .timeControls('ul.times li', function(from) {
+      overview.update(from);
+    })
+    .timeSet(overview.from)
+    .bindKeys();
