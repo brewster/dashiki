@@ -1,0 +1,297 @@
+ul.dashboards {
+  list-style-type: none;
+}
+
+/* multi-column dashboards menu on large screens */
+@media screen and (min-width: 768px) {
+  .projects ul.dropdown-menu {
+    width: 960px;
+    -webkit-column-count: 3;
+    -moz-column-count:    3;
+    -o-column-count:      3;
+    column-count:         3;
+  }
+}
+
+.icon-home,
+.icon-globe,
+.icon-stop,
+.icon-play,
+.icon-pause,
+.icon-refresh {
+  opacity: 0.5;
+}
+
+.icon-home:hover,
+.icon-globe:hover,
+.icon-stop:hover,
+.icon-play:hover,
+.icon-pause:hover,
+.icon-refresh:hover {
+  opacity: 1.0;
+}
+
+.project_index {
+  /* width: 960px; */
+  margin-left: 0;
+  margin-right: 0;
+}
+
+
+/* top-level subdir of cfg */
+.section {
+  background-color: WhiteSmoke;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  border: 2px solid #e3e3e3;
+  padding-top: 0;
+  padding-bottom: 1em;
+  margin-bottom: 0.5em;
+}
+
+.section h2 {
+  margin-bottom: 0;
+}
+
+/* list of project cfgs */
+@media screen and (min-width: 768px) {
+  .columns {
+    -webkit-column-count: 3;
+    -moz-column-count:    3;
+    -o-column-count:      3;
+    column-count:         3;
+  }
+}
+
+/* displays small graphs */
+.statbox {
+  position: relative;           /* so that graph child can be relative to this */
+  font-size: 1em;
+  padding: 1em;
+  margin-bottom: 0.5em;
+  height: 100px;
+  border: 2px solid #e3e3e3;
+  background-color: WhiteSmoke;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.statbox .value {
+  position: absolute;
+  font-size: 1.4em;
+  left: 0;
+  right: 0;
+  top: 30%;
+  padding: 1em;
+  text-align: center;
+  z-index: 100;
+}
+
+.statbox .display {
+  font-weight: bold;
+  font-size: 0.8em;
+  opacity: 0.5;
+  padding-left: 0.5em;
+  padding-bottom: 0.5em;
+}
+
+.statbox .graph {
+  position: absolute;           /* within parent div */
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  opacity: 0.25;
+}
+
+.statbox .drawer {
+  background-color: #000;
+  opacity: 0.65;
+  color: #fff;
+  /* text-shadow: 0.1em 0.1em #333; */
+  text-align: center;
+  font-size: 0.8em;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  height: 4em;;
+}
+
+.statbox.selected {
+  border: 2px solid #a3a3a3;
+}
+
+#big_graph_title {
+  margin-top: -1em;
+  margin-bottom: 1em;
+  padding-top: 0;
+  padding-bottom: 0px;
+  text-align: center;
+}
+
+#big_graph_legend {
+  display: inline-block;
+  position: relative;
+  vertical-align: top;
+  margin: 10px 0 0 10px;
+}
+
+#source_link, #source_download, #toggle_events {
+  font-size: 0.8em;
+}
+
+#toggle_events i {
+  opacity: 0.5;
+}
+#toggle_events i.on {
+  opacity: 1.0;
+}
+
+.dash_events_timeline {
+  height: 1px;
+  border-top: 1px solid #e0e0e0;
+  margin-top: 10px;
+  position: relative;
+}
+
+/* draw a dot */
+.dash_event {
+  position: absolute;
+  height: 8px;
+  width: 8px;
+  margin-left: -3px;
+  top: -4px;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+/* draw a vertical line */
+.dash_event_line {
+  position: absolute;
+  top: 0;
+  bottom: -4px;
+  width: 0px;
+  border-left: 2px solid rgba(0, 0, 0, 0.3);
+  display: block;
+}
+
+.dash_event_text {
+  position: absolute;
+  padding: 0 0.5em 0 0.5em;
+  font-size: 0.7em;
+  font-weight: bold;
+  opacity: 0.75;
+  color: white;
+  background-color: black;
+  border: 1px solid black;
+  width: auto;
+  border-radius: 3px;
+  white-space: nowrap;
+  display: none;
+}
+
+.dash_event_text.active {
+  display: inline-block;
+}
+
+.dash_event_text > div {
+  padding: 0px;
+  margin: -0.5em 0 -0.25em 0;
+}
+
+#bgcontrols {
+  display: block;
+  margin: 2px;
+}
+#bgcontrols input[type=radio] {
+  opacity: 0;
+  display: none;
+  position: absolute;
+}
+#bgcontrols label {
+  display: inline-block;
+  padding: 0;
+  width: 25px;
+  padding-top: 27px;
+  text-align: center;
+  font-size: 10px;
+  color: #808080;
+  background-repeat: no-repeat;
+  position: relative;
+  margin: 0 2px;
+  cursor: pointer;
+}
+label[for=area] {
+  background: url(/images/graph_stack.png);
+}
+label[for=line] {
+  background: url(/images/graph_lines.png);
+}
+label[for=bar] {
+  background: url(/images/graph_bar.png);
+}
+label[for=scatter] {
+  background: url(/images/graph_scatter.png);
+}
+
+#overview .statbox {
+  font-size: 0.7em;
+  line-height: 90%;
+  padding: 0.25em;
+  margin-bottom: 0.5em;
+  height: 50px;
+}
+
+#overview .statbox .value {
+  top: 30%;
+  padding: 0.5em;
+}
+
+#overview .statbox .title {
+  opacity: 0.5;
+}
+
+#overview .project {
+  color: #999;
+  border: 2px solid #999;
+  background-color: white;
+  font-weight: bold;
+  font-variant: small-caps;
+  font-size: 1.0em;
+}
+
+#overview .project a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.green {
+  background-color: #afdab1;
+}
+
+.yellow {
+  background-color: #fcfccc;
+}
+
+.red {
+  background-color: #d59295;
+}
+
+.production_deploys {
+  background-color: IndianRed;
+}
+.megalookup_production_deploys {
+  background-color: GoldenRod;
+}
+.imagine_production_deploys {
+  background-color: SlateBlue;
+}
+.puppet_deploys {
+  background-color: PaleGreen;
+}
