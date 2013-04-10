@@ -1,0 +1,76 @@
+.navbar.navbar-inverse.navbar-fixed-top
+  .navbar-inner
+    .container
+      %a.btn.btn-navbar{"data-toggle"=>"collapse", "data-target"=>".nav-collapse"}
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      %a.brand{:href=>"/"}
+        %i.icon-home.icon-white
+      %ul.nav.overviews
+        %li.dropdown
+          %a.brand.dropdown-toggle{:href=>"#", :"data-toggle"=>"dropdown"}
+            %i.icon-globe.icon-white
+          %ul.dropdown-menu
+            %li.nav-header
+              Overviews
+            %li
+              %a{href: '/overview?class=red'}
+                Red
+            %li
+              %a{href: '/overview?class=red,yellow'}
+                Red, Yellow
+            %li
+              %a{href: '/overview?class=red,yellow,green'}
+                Red, Yellow, Green
+      %ul.nav.projects
+        %li.dropdown
+          %a.brand.dropdown-toggle{:href=>"#", :"data-toggle"=>"dropdown"}
+            = @title
+            %b.caret
+          %ul.dropdown-menu
+            - @dashboards.each do |section, paths|
+              %li.nav-header
+                = section || "---"
+              - paths.each do |path|
+                %li
+                  %a{href: '/' + path.join('/')}
+                    = path[1..-1].compact.map{ |p| p.gsub(/_/, ' ').capitalize }.join(' » ')
+
+      - unless request.path == '/'
+        .nav-collapse.collapse
+          %ul.nav
+            %li
+              %a#playpause{:href=>"#"}
+                %span.icon-play.icon-white
+            %li
+              %a#refresh{:href=>"#"}
+                %span.icon-refresh.icon-white
+          %ul.nav.pull-right.times
+            %li
+              %a{:href=>"#", "data-from"=>"00:00"}today
+            %li
+              %a{:href=>"#", "data-from"=>"-5min"}5m
+            %li
+              %a{:href=>"#", "data-from"=>"-15min"}15m
+            %li
+              %a{:href=>"#", "data-from"=>"-1h"}1h
+            %li
+              %a{:href=>"#", "data-from"=>"-4h"}4h
+            %li
+              %a{:href=>"#", "data-from"=>"-1d"}1d
+            %li
+              %a{:href=>"#", "data-from"=>"-1w"}1w
+            %li
+              %a{:href=>"#", "data-from"=>"-2w"}2w
+            %li
+              %a{:href=>"#", "data-from"=>"-1mon"}1m
+            %li.dropdown
+              %a.dropdown-toggle{:href=>"#", :"data-toggle"=>"dropdown"}
+                other
+                %b.caret
+              %div.dropdown-menu{style: "padding: 15px; padding-bottom: 0px;"}
+                %form
+                  %label
+                    from:
+                  %input#from{style: "margin-bottom: 15px;", type: "text", name: "from", size: "30", placeholder: "e.g. -2h or 12:00"}

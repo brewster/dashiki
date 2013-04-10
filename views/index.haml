@@ -1,0 +1,27 @@
+= haml :nav
+
+.container
+  - if @error
+    .alert.alert-error
+      = @error
+  .project_index
+    - @dashboards.each do |section, paths|
+      .section
+        %h2.nav-header
+          = section || "Top"
+        .columns
+          %ul.nav.nav-list
+            - paths.each do |path|
+              %li
+                %a{href: path.join('/')}
+                  = path[1..-1].compact.map{ |p| p.gsub(/_/, ' ').capitalize }.join(' » ')
+
+%script{:type=>"text/javascript", :src=>"/bootstrap/js/jquery.js"}
+%script{:type=>"text/javascript", :src=>"/bootstrap/js/bootstrap.min.js"}
+
+:javascript
+  $(function() {
+    $(".directory").click(function() {
+      $(this).siblings("ul").slideToggle();
+    });
+  });

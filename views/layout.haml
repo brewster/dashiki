@@ -1,0 +1,16 @@
+%html
+  %head
+    %title= @title
+    %meta{:name=>"viewport", :content=>"width=device-width, initial-scale=1.0"}
+    %link{:rel=>"shortcut icon", :href=>"/favicon.ico", :type=>"image/x-icon", :id=>"favicon"}
+    %link{:rel=>"stylesheet", :href=>"/bootstrap/css/bootstrap.min.css"}
+    %link{:rel=>"stylesheet", :href=>"/bootstrap/css/bootstrap-responsive.min.css"}
+    %link{:rel=>"stylesheet", :type=>"text/css", :href=>"http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css"}
+    %link{:rel=>"stylesheet", :href=>"/rickshaw/rickshaw.min.css"}
+    :css
+      body{padding-top: 60px; padding-bottom: 40px;}
+    -# %link{:rel=>"stylesheet", :href=>"/bootstrap/css/bootstrap-responsive.css"}
+    %link{:rel=>"stylesheet", :href=>"/css/dashboard.css"}
+
+    %body
+    = yield
