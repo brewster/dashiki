@@ -228,16 +228,16 @@ ul.dashboards {
   cursor: pointer;
 }
 label[for=area] {
-  background: url(/images/graph_stack.png);
+  background: url(/img/graph_stack.png);
 }
 label[for=line] {
-  background: url(/images/graph_lines.png);
+  background: url(/img/graph_lines.png);
 }
 label[for=bar] {
-  background: url(/images/graph_bar.png);
+  background: url(/img/graph_bar.png);
 }
 label[for=scatter] {
-  background: url(/images/graph_scatter.png);
+  background: url(/img/graph_scatter.png);
 }
 
 #overview .statbox {
