@@ -22,7 +22,7 @@ Dash.BigGraph.Rickshaw = function(element) {
   }).render();
 
   // hover shows data values
-  new Rickshaw.Graph.HoverDetailWithNulls( {
+  new Dash.BigGraph.Rickshaw.HoverDetail( {
     graph: this.graph
   });
 
@@ -71,7 +71,7 @@ Dash.BigGraph.Rickshaw.prototype = {
 
   // create events timeline at given element/selector
   createTimeline: function(selector) {
-    this.timeline = new Dash.BigGraph.Timeline({
+    this.timeline = new Dash.BigGraph.Rickshaw.Timeline({
       graph: this.graph,
       element: $(selector)[0]
     });
