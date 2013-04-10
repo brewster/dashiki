@@ -7,8 +7,9 @@ What does it do?
 
 ## How do I run it?
 
-    symlink your config directory (for example: cd dashboard && ln -s cfg-examples cfg)
-    ruby ./server.rb, or set it up like any Sinatra app with Phusion Passenger
+    bundle install
+    ln -s cfg-examples cfg
+    rackup
 
 ## Configuration
 
@@ -148,5 +149,5 @@ request through a simple GET proxy on the dashboard server.
 
 ## License
 
-Dashboard is distributed under the MIT license. See the attached LICENSE
+Dashiki is distributed under the MIT license. See the attached LICENSE
 file for all the sordid details.
