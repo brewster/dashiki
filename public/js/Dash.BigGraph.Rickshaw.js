@@ -15,7 +15,7 @@ Dash.BigGraph.Rickshaw = function(element) {
     graph: this.graph
   }).render();
 
-  this.graph.y_axis = new Dash.Graph.Axis.Y( {
+  this.graph.y_axis = new Dash.BigGraph.Rickshaw.Axis.Y( {
     graph: this.graph,
     orientation: 'right',
     element: document.getElementById('y_axis'),
