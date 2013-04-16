@@ -11,6 +11,10 @@ What does it do?
     ln -s cfg-examples cfg
     rackup
 
+## What's it look like?
+
+![Dashiki Screenshot](https://raw.github.com/brewster/assets/master/img/dashiki/screenshot.png "Dashiki Logstash Elasticsearch Dashboard")
+
 ## Configuration
 
 * configuration files should like under cfg/. See examples in cfg-examples
