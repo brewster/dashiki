@@ -3,6 +3,8 @@
 
 require 'sinatra'
 require 'open-uri'
+require './lib/google_analytics.rb'
+helpers Dash::GoogleAnalytics
 
 set :dashdir, 'cfg'    # subdir where dashboard js files live
 set :show_exceptions, false
@@ -107,8 +109,6 @@ get '/_testfind_/*' do |count|
 end
 
 post '/_google_/auth' do
-  require './lib/google_analytics.rb'
-  helpers Dash::GoogleAnalytics
   google_auth(params)
 end
 
