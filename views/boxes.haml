@@ -50,6 +50,7 @@
 %script{:type=>"text/javascript", :src=>"/js/Dash.Source.Opscenter.js"}
 %script{:type=>"text/javascript", :src=>"/js/Dash.Source.Pingdom.js"}
 %script{:type=>"text/javascript", :src=>"/js/Dash.Source.Errplane.js"}
+%script{:type=>"text/javascript", :src=>"/js/Dash.Source.GoogleAnalytics.js"}
 %script{:type=>"text/javascript", :src=>"/js/Dash.Source.Test.js"}
 %script{:type=>"text/javascript", :src=>"/js/Dash.Source.Logstash.js"}
 %script{:type=>"text/javascript", :src=>"/js/Dash.Date.js"}
@@ -80,6 +81,7 @@
   Dash.stats_list.forEach(function(project) {
     project.ready(function() {
       boxes
+        .addPreHooks(project.pre_hooks)
         .createBoxes('#statboxes', project.stats)
         .createGraphs(project.stats)
         .updateStats(project.stats);

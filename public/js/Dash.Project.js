@@ -3,6 +3,7 @@ Dash.namespace('Project');
 
 Dash.Project = function() {
   this.defaults = $.extend(true, {}, Dash.defaults||{});
+  this.pre_hooks = [];
   this.stats = [];
   this.promises = [];
   return this;
@@ -16,6 +17,14 @@ Dash.Project.prototype = {
     return this;
   },
 
+  // add functions to be run before each dashboard update
+  pre: function() {
+    for (var i=0, len=arguments.length; i<len; i++) {
+      this.pre_hooks.push(arguments[i]);
+    }
+    return this;
+  },
+  
   // add some new stats to the project, with current set of defaults applied
   add: function() {
     for (var i=0, len=arguments.length; i<len; i++) {

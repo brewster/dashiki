@@ -3,11 +3,20 @@ Dash.namespace('Boxes');
 Dash.Boxes = function(cfg) {
   $.extend(true, this, cfg);
   this.stats = [];
+  this.pre_hooks = [];
   //this.events = [];
   return this;
 }
 
 Dash.Boxes.prototype = {
+  
+  // pre_hooks are functions to be called before each dashboard update
+  addPreHooks: function(hooks) {
+    hooks.forEach(function(hook) {
+      this.pre_hooks.push(hook);
+    }, this);
+    return this;
+  },
   
   // add stat boxes to dom for an array of Stat objects
   createBoxes: function(element, stats) {
@@ -74,6 +83,11 @@ Dash.Boxes.prototype = {
   // update all stats
   updateStats: function(stats) {
     var self = this;
+
+    this.pre_hooks.forEach(function(hook) {
+      hook();
+    });
+
     (stats || this.stats).forEach(function(stat) {
       stat.update(self.from, function(stat) {
         self
