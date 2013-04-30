@@ -1,10 +1,12 @@
 #!/usr/bin/env ruby
 # -*- coding: utf-8 -*-
+
 require 'sinatra'
 require 'open-uri'
 
 set :dashdir, 'cfg'    # subdir where dashboard js files live
 set :show_exceptions, false
+set :counter, 0
 
 configure do
   use Rack::Static, :urls => ["/#{settings.dashdir}"] # serve cfg dir as static content
@@ -102,6 +104,17 @@ get '/_testfind_/*' do |count|
     3.times.map { mkword.call(rand(7)+4) }.join('.')
   end
   JSON(metrics)
+end
+
+post '/_google_/auth' do
+  require './lib/google_analytics.rb'
+  helpers Dash::GoogleAnalytics
+  google_auth(params)
+end
+
+get '/_google_/get' do
+  content_type :json
+  google_get(params).rows.to_json
 end
 
 ## display a dashboard
