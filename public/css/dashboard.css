@@ -295,3 +295,6 @@ label[for=scatter] {
 .puppet_deploys {
   background-color: PaleGreen;
 }
+.ganglia_events {
+  border: 1px dotted DarkGray;
+}
