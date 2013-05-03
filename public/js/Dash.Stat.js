@@ -108,7 +108,9 @@ Dash.Stat.prototype = {
     this.aggregate = this.aggregateSeries(this.series); // series sum/mean across all metrics
     this.stats = this.calculateValues(this.aggregate);  // {sum, mean, max, min} for display
 
-    var raw_value  = this.stats[this.display || 'sum']; // raw display value
+    var raw_value = this.stats[this.display || 'sum']; // raw display value
+    isNaN(raw_value) && (raw_value = 'no data');       // do something sane for empty data
+
     this.classes = [].concat(this.matchingThresholds(raw_value)); // css classes to apply
     this.value = this.format(raw_value); // formatted display value with units
     return this;
