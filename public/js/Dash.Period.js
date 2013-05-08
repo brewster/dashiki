@@ -6,7 +6,7 @@ Dash.Period = function(from, to) {
   this.now = new Date;
   this.start = new Dash.Period.relativeDate(from, this.now);
   this.end   = new Dash.Period.relativeDate(to,   this.now);
-  this.length = this.end - this.start;
+  this.length = (this.end - this.start)/1000;
   return this;
 }
 
