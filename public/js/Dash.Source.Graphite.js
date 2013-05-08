@@ -1,14 +1,41 @@
 Dash.namespace('Source.Graphite');
 
 Dash.Source.Graphite = function(stat) {
-  var stub = stat.source + "/render?target=" + encodeURI(stat.target);
-
-  this.url = function(period) {          // how to get data
-    return stub + "&from=" + period.from + "&format=json";
+  var stub = stat.source + "/render?target=";
+  
+  // choose a sane resolution by period length
+  this.stepSize = function(length) {
+    var step;
+    if ( length <= 4*3600 ) {            // 4hour
+      step = '10s';                      // likely default for graphite
+    } else if ( length <= 12*3600 ) {    // 12hours
+      step = '1min';
+    } else if ( length <= 24*3600 ) {    // 1d
+      step = '5min';
+    } else if ( length <= 14*24*3600 ) { // 2weeks
+      step = '1h';
+    } else {
+      step = '1d';
+    }
+    return step;
+  };
+  
+  // return graphite function call to bucket data appropriately for period
+  this.summarize = function(length) {
+    var func = 'smartSummarize(' + stat.target + ',"' +
+      this.stepSize(length)  + '","' + stat.display + '")';
+    return encodeURI(func);
+  };
+  
+  // how to get data
+  this.url = function(period) {
+    return stub + this.summarize(period.length) + "&from=" + period.from + "&format=json";
   };
 
-  this.link = function(period) {         // link to the original data source
-    return stub + "&from=" + period.from + "&height=600&width=800";
+  // link to the original data source
+  var link = stub + encodeURI(stat.target) + "&height=600&width=800";
+  this.link = function(period) {
+    return link + "&from=" + period.from;
   };
 
   return this;
