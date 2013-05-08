@@ -89,7 +89,7 @@ Dash.Boxes.prototype = {
     });
 
     (stats || this.stats).forEach(function(stat) {
-      stat.update(self.from, function(stat) {
+      stat.update(self.period, function(stat) {
         self
           .updateBoxValue(stat)
           .updateBoxClass(stat)
@@ -158,18 +158,18 @@ Dash.Boxes.prototype = {
   updateBigGraph: function(stat) {
     this.big_graph
       .updateData(stat)
-      .updateLink(stat.data_source.link(this.from))
-      .updateDownload(stat.data_source.url(this.from));
+      .updateLink(stat.data_source.link(this.period))
+      .updateDownload(stat.data_source.url(this.period));
     return this;
   },
 
   // update data for everything
   update: function(from) {
-    (from != undefined) && (this.from = from); // save from time if passed
-
+    (from != undefined) && (this.period = new Dash.Period(from, 'now'));
+    
     this.big_graph.deleteEventLines();
     this.updateStats();
-    this.show_events && this.big_graph.addEventLines(this.from);
+    this.show_events && this.big_graph.addEventLines(this.period);
     return this;
   },
 

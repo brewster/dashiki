@@ -95,10 +95,10 @@ Dash.BigGraph.Rickshaw.prototype = {
   },
 
   // add event lines for given array of events, or saved
-  addEventLines: function(from, events) {
+  addEventLines: function(period, events) {
     var self = this;
     (events || this.events).forEach(function(stat) {
-      stat.updateEvent(from, function(stat) {
+      stat.updateEvent(period, function(stat) {
         self.updateEventLines(stat);
       });
     });

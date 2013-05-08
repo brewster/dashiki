@@ -66,9 +66,9 @@ Dash.Stat.prototype = {
   },
 
   // call this to update a series for graphing
-  update: function(from, callback) {
+  update: function(period, callback) {
     var self = this;
-    this.get(from).done(function(data) {
+    this.get(period).done(function(data) {
       self.updateData(self.applyFilter(data));
       callback(self);
     })
@@ -76,9 +76,9 @@ Dash.Stat.prototype = {
   },
 
   // call this instead for discrete events
-  updateEvent: function(from, callback) {
+  updateEvent: function(period, callback) {
     var self = this;
-    this.get(from).done(function(data) {
+    this.get(period).done(function(data) {
       self.events = self.data_source.toEvents(self.applyFilter(data));
       callback(self);
     })
@@ -86,14 +86,14 @@ Dash.Stat.prototype = {
   },
 
   // do request for updated stat data, return the deferred ajax object
-  get: function(from) {
-    var url = this.data_source.url(from);
+  get: function(period) {
+    var url = this.data_source.url(period);
 
     // source url() function can return just a url string to GET, or entire http request object
     var request = (typeof url === "string") ?
       {
         type:     'GET',
-        url:      this.data_source.url(from),
+        url:      this.data_source.url(period),
         dataType: 'json',
         headers:  this.headers || {},
         error:   function(xhr, type, err) { console.log(type + ': ' + err); }
