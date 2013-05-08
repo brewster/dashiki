@@ -139,7 +139,7 @@ Dash.Boxes.prototype = {
     stat.box
       .children('.drawer')
       .html('&Sigma;=' + stat.stats.sum.toFixed(1)  + '&nbsp;&nbsp;' +
-            '&mu;='    + stat.stats.mean.toFixed(1) + '<br>' +
+            '&mu;='    + stat.stats.avg.toFixed(1)  + '<br>' +
             '&uarr;'   + stat.stats.max.toFixed(1)  + '&nbsp;&nbsp;' +
             '&darr;'   + stat.stats.min.toFixed(1)  + '&nbsp;&nbsp;' +
             '&rarr;'   + stat.stats.last);

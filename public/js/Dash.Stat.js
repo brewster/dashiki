@@ -10,6 +10,12 @@ Dash.Stat = function(cfg) {
       this[key] = cfg[key];
     }
   }
+
+  // synonym for backward-compat and user-friendliness
+  if ( this.display == 'mean' ) {
+    this.display = 'avg';
+  }
+  
   return this;
 }
 
@@ -28,7 +34,7 @@ Dash.Stat.prototype = {
       });
     });
 
-    if ( this.aggregate == 'mean' ) {
+    if ( this.aggregate == 'mean' || this.aggregate == 'avg' ) {
       var len = totals.length;
       return totals.map(function(x) { return x/len });
     } else {
@@ -53,7 +59,7 @@ Dash.Stat.prototype = {
     var len = non_null.length;
     return {
       sum:  sum,
-      mean: sum/len,
+      avg:  sum/len,
       max:  max,
       min:  min,
       last: len == 0 ? 'no data' : non_null[len-1]
@@ -118,7 +124,7 @@ Dash.Stat.prototype = {
 
   displaySymbols: {
     sum:  '&Sigma;',
-    mean: '&mu;',
+    avg:  '&mu;', // use avg instead of mean to work with graphite summarize()
     max:  '&uarr;',
     min:  '&darr;',
     last: '&rarr;'
