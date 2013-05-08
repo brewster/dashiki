@@ -38,16 +38,17 @@ Dash.namespace('Source.Sendgrid');
 Dash.Source.Sendgrid = function(stat) {
   var stub = 'http://sendgrid.com/api/stats.get.json' +
     '?api_user=' + stat.api_user +
-    '&api_key=' + stat.api_key;
+    '&api_key='  + stat.api_key;
 
   this.url = function(period) {
-    this.from_epoch = period.start.getTime()/1000;
-    this.to_epoch   = Math.floor((new Date).getTime()/1000); // current epoch in sec
-
-    var start_date = (new Date(this.from_epoch*1000)).toISOString().split('T')[0],
-        end_date   = (new Date(this.to_epoch*1000  )).toISOString().split('T')[0];
+    // sendgrid api has barftastic timezone issues and always looks up dates in CT;
+    // ahead of CT and request a date sendgrid considers future? you will get a 400;
+    // hence use 'days' param instead of dates; 0 days will give us today's data,
+    // or ask for number of days in addition to today (e.g. days=6 for last week of data)
+    var num_days = Math.floor(period.length/(24*3600*1000));
+    (num_days > 0) && (num_days -= 1);
     
-    return stub + '&start_date=' + start_date + '&end_date=' + end_date;
+    return stub + '&days=' + num_days;
   };
   
   this.link = function(period) {
