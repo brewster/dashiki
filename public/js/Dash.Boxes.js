@@ -165,7 +165,9 @@ Dash.Boxes.prototype = {
 
   // update data for everything
   update: function(from) {
-    (from != undefined) && (this.period = new Dash.Period(from, 'now'));
+    if ( from != undefined ) {
+      this.period = new Dash.Period(from, 'now');
+    }
     
     this.big_graph.deleteEventLines();
     this.updateStats();
@@ -176,7 +178,7 @@ Dash.Boxes.prototype = {
   // turn events on or off
   showEvents: function(state) {
     if ( state === true ) {
-      (this.show_events === false) && this.big_graph.addEventLines(this.from);
+      (this.show_events === false) && this.big_graph.addEventLines(this.period);
       this.show_events = true;
     }
     else if ( state === false ) {

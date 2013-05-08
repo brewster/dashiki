@@ -109,9 +109,9 @@
       }
     )
     .timeControls('ul.times li', function(from) {
-      // turn off event display over this number of secs
+      // turn off event display over this number of secs, FIXME I should use period.length
       ((Dash.Date.toSec(from) > 60*60*24) == boxes.show_events) && $('#toggle_events').click();
       boxes.update(from);
     })
-    .timeSet(boxes.from)
+    .timeSet(boxes.period.from)
     .bindKeys();
