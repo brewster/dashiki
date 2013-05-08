@@ -9,16 +9,16 @@ Dash.namespace('Source.Ganglia_events');
 Dash.Source.Ganglia_events = function(stat) {
   var stub = stat.source + '/ganglia/api/events.php?action=list';
 
-  this.url = function(from) {
+  this.url = function(period) {
 
     // to{Series,Events} need these later
-    this.from_epoch = Dash.Date.toEpoch(from);
+    this.from_epoch = period.start.getTime()/1000;
     this.to_epoch   = Math.floor((new Date).getTime()/1000); // current epoch in sec
 
     return stub;
   };
 
-  this.link = function(from) {
+  this.link = function(period) {
     return stub;
   };
 

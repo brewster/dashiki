@@ -40,8 +40,8 @@ Dash.Source.Sendgrid = function(stat) {
     '?api_user=' + stat.api_user +
     '&api_key=' + stat.api_key;
 
-  this.url = function(from) {
-    this.from_epoch = Dash.Date.toEpoch(from);
+  this.url = function(period) {
+    this.from_epoch = period.start.getTime()/1000;
     this.to_epoch   = Math.floor((new Date).getTime()/1000); // current epoch in sec
 
     var start_date = (new Date(this.from_epoch*1000)).toISOString().split('T')[0],
@@ -50,12 +50,11 @@ Dash.Source.Sendgrid = function(stat) {
     return stub + '&start_date=' + start_date + '&end_date=' + end_date;
   };
   
-  this.link = function(from) {
+  this.link = function(period) {
     return 'http://sendgrid.com/statistics';
   };
 
   this.toSeries = function(data) {
-    console.log(data);
     return [{
       name: 'sendgrid.stats',
       data: data.map(function(point) {

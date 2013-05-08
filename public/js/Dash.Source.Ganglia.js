@@ -15,13 +15,13 @@ Dash.Source.Ganglia = function(stat) {
   }
 
   var stub = stat.source + "/ganglia/graph.php?" + params.join('&');
-  this.url = function(from) {
-    return stub + '&json=1' + "&cs=" + from;
+  this.url = function(period) {
+    return stub + '&json=1' + "&cs=" + period.from;
   };
 
   var linkstub = stat.source + "/ganglia?" + params.join('&');
-  this.link = function(from) {
-    return linkstub + "&cs=" + from;
+  this.link = function(period) {
+    return linkstub + "&cs=" + period.from;
   };
 
   return this;
@@ -39,4 +39,5 @@ Dash.Source.Ganglia.prototype = {
       };
     });
   }
+
 };

@@ -1,14 +1,14 @@
 Dash.namespace('Source.Test');
 
 Dash.Source.Test = function(stat) {
-  var stub = "/_testdata_/?target=" + stat.target;
+  var stub = "/_test_/data/?target=" + stat.target;
 
-  this.url = function(from) {
-    return stub + "&from=" + Dash.Date.toEpoch(from);
+  this.url = function(period) {
+    return stub + "&from=" + period.start.getTime()/1000;
   };
 
-  this.link = function(from) {
-    return this.url(from);
+  this.link = function(period) {
+    return this.url(period);
   };
 
   return this;
@@ -16,7 +16,7 @@ Dash.Source.Test = function(stat) {
 
 Dash.Source.Test.find = function(server, query, callback) {
   var request = {
-    url: '/_testfind_/' + query,
+    url: '/_test_/find/' + query,
     dataType: 'json'
   };
   return Dash.ajax(request)

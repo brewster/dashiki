@@ -3,12 +3,12 @@ Dash.namespace('Source.Graphite');
 Dash.Source.Graphite = function(stat) {
   var stub = stat.source + "/render?target=" + encodeURI(stat.target);
 
-  this.url = function(from) {          // how to get data
-    return stub + "&from=" + from + "&format=json";
+  this.url = function(period) {          // how to get data
+    return stub + "&from=" + period.from + "&format=json";
   };
 
-  this.link = function(from) {         // link to the original data source
-    return stub + "&from=" + from + "&height=600&width=800";
+  this.link = function(period) {         // link to the original data source
+    return stub + "&from=" + period.from + "&height=600&width=800";
   };
 
   return this;

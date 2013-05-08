@@ -6,22 +6,25 @@ Dash.Source.Errplane = function(stat) {
       target      = encodeURIComponent(stat.target),
       show        = stat.show || 'counts'; // counts or times
 
-  this.url_counts = function(from) {
-    var last = Math.floor(Dash.Date.toSec(from)/rollup); // number of time buckets to get
+  this.url_counts = function(period) {
+    //var last = Math.floor(Dash.Date.toSec(from)/rollup); // number of time buckets to get
+    var last = Math.floor(Dash.Date.toSec(period.from)/rollup); // number of time buckets to get
     return stub + '/rollups/' + rollup +
       '?api_key=' + stat.api_key + '&name=' + target + '&last=' + last;
   };
 
-  this.url_times = function(from) {
-    var start = Dash.Date.toEpoch(from),
-        end   = Math.floor((new Date).getTime()/1000); // current epoch in sec
+  this.url_times = function(period) {
+    // var start = Dash.Date.toEpoch(from),
+    //     end   = Math.floor((new Date).getTime()/1000); // current epoch in sec
+    var start = Math.floor(period.start.getTime()/1000),
+        end   = Math.floor(period.end.getTime()/1000);
     return stub + '/series?api_key=' + stat.api_key + '&name=' + target +
       '&include_ids=true&start=' + start + '&end=' + end + '&last=5000';
   };
 
   this.url = this['url_'+show]; // count or times
   
-  this.link = function(from) {
+  this.link = function(period) {
     return 'https://errplane.com/databases/' + stat.app_id + stat.environment +
       '/time_series#' + stat.target;
   };

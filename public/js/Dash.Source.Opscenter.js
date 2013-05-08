@@ -11,11 +11,11 @@ Dash.Source.Opscenter = function(stat) {
   var target = stat.target || stat.metric; // backward compat
   var stub = stat.source + target.replace(/^\/*/, '/') + '?' + params.join('&');
 
-  this.url = function(from) {
-    return stub + "&start=" + Dash.Date.toEpoch(from);
+  this.url = function(period) {
+    return stub + "&start=" + period.start.getTime()/1000;
   };
 
-  this.link = function(from) {
+  this.link = function(period) {
     return stat.source;
   };
 

@@ -37,10 +37,11 @@ Dash.Source.Googleanalytics = function(stat) {
     'metrics'   : stat.target
   };
   
-  this.url = function(from) {
-
+  this.url = function(period) {
+    console.log(period);
     // this.toSeries() will be needing these for filtering date range
-    this.from_epoch = Dash.Date.toEpoch(from);
+    //this.from_epoch = Dash.Date.toEpoch(from);
+    this.from_epoch = period.start.getTime()/1000;
     this.to_epoch   = Math.floor((new Date).getTime()/1000); // current epoch in sec
 
     // ga needs dates as 'yyyy-mm-dd'
@@ -52,8 +53,8 @@ Dash.Source.Googleanalytics = function(stat) {
     }).join('&');
   };
 
-  this.link = function(from) {
-    return this.url(from);
+  this.link = function(period) {
+    return this.url(period);
   };
 
   this.toSeries = function(data) {

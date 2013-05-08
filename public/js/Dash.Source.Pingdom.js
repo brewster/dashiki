@@ -5,26 +5,23 @@ Dash.Source.Pingdom = function(stat) {
   this.measure = stat.measure || 'responsetime';
 
   var stub = stat.source + encodeURI(stat.target);
-  this.url = function(from) {
-    return stub + "&from=" + Dash.Date.toEpoch(from);
+  this.url = function(period) {
+    //return stub + "&from=" + Dash.Date.toEpoch(from);
+    return stub + "&from=" + period.start.getTime()/1000;
   };
 
   // target should contain a digit of at least 6 chars
   var check = stat.target.match(/\d{6,}/)[0];
-  this.link = function(from) {
+  this.link = function(period) {
     return "https://my.pingdom.com/reports/" +
       this.measure + "#check=" + check +
-      "&daterange=" + from;
+      "&daterange=" + period.from;
   };
 
   return this;
 };
 
 Dash.Source.Pingdom.prototype = {
-
-  urlFrom: function(from) {
-    return this.url + "&from=" + Dash.Board.date2epoch(from);
-  },
 
   // how to extract response time as y data
   responsetime: function(r) {
@@ -45,7 +42,6 @@ Dash.Source.Pingdom.prototype = {
       var result = data.results[i];
       results.data.push( {
         x: result.time,
-        //y: this[this.measure](result)
         y: this[this.measure](result)
       } );
     }

@@ -28,9 +28,9 @@ Dash.Source.Logstash = function(stat) {
     }
   };
 
-  this.url = function(from) {
-    var now       = new Date(),
-        from_date = (new Date(Dash.Date.toEpoch(from)*1000)).toJSON(), // ISO date
+  this.url = function(period) {
+    var now       = period.now,
+        from_date = period.start.toJSON(), // ISO date
         to_date   = now.toJSON(), // ISO date
         url_date  = to_date.split('T')[0].replace(/-/g, '.'); // yyyy.MM.dd (no sprintf rly?)
 
@@ -50,7 +50,7 @@ Dash.Source.Logstash = function(stat) {
     };
   };
 
-  this.link = function(from) {
+  this.link = function(period) {
     return stub;                // FIXME: make a proper logstash link
   };
 
