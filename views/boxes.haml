@@ -44,6 +44,7 @@
 %script{:type=>"text/javascript", :src=>"/js/Dash.Boxes.js"}
 %script{:type=>"text/javascript", :src=>"/js/Dash.UI.js"}
 %script{:type=>"text/javascript", :src=>"/js/Dash.Stat.js"}
+%script{:type=>"text/javascript", :src=>"/js/Dash.Period.js"}
 %script{:type=>"text/javascript", :src=>"/js/Dash.Format.js"}
 %script{:type=>"text/javascript", :src=>"/js/Dash.Source.Graphite.js"}
 %script{:type=>"text/javascript", :src=>"/js/Dash.Source.Ganglia.js"}
@@ -62,6 +63,7 @@
 :javascript
   var boxes = new Dash.Boxes({
     from: '-1h',
+    period: new Dash.Period('-1h', 'now'),
     show_events: true
   });
 
@@ -76,7 +78,7 @@
     project.ready(function() {
       boxes.big_graph
         .createEvents(project.stats)
-        .addEventLines(boxes.from, project.stats);
+        .addEventLines(boxes.period, project.stats);
     })
   });
 
