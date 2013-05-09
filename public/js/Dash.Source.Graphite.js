@@ -22,7 +22,7 @@ Dash.Source.Graphite = function(stat) {
   
   // return graphite function call to bucket data appropriately for period
   this.summarize = function(length) {
-    var func = 'smartSummarize(' + stat.target + ',"' +
+    var func = 'summarize(' + stat.target + ',"' +
       this.stepSize(length)  + '","' + stat.display + '")';
     return encodeURI(func);
   };
