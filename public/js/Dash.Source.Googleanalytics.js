@@ -34,7 +34,8 @@ Dash.Source.Googleanalytics = function(stat) {
     'public_key': stat.public_key,                   // matches private_key file used to auth
     'dimensions': 'ga:year,ga:month,ga:day,ga:hour', // need all date components for x-axis
     'sort'      : 'ga:year,ga:month,ga:day,ga:hour', // ... in a known order
-    'metrics'   : stat.target
+    'metrics'   : stat.target,
+    'filters'   : stat.filters  // e.g. ga:eventLabel==feed-notification
   };
   
   this.url = function(period) {
@@ -49,7 +50,7 @@ Dash.Source.Googleanalytics = function(stat) {
     params['end-date']   = (new Date(this.to_epoch*1000  )).toISOString().split('T')[0];
 
     return '/_google_/get?' + $.map(params, function(v, k) {
-      return k + '=' + v;
+      return v ? k + '=' + v : null;
     }).join('&');
   };
 
