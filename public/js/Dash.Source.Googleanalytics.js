@@ -49,9 +49,10 @@ Dash.Source.Googleanalytics = function(stat) {
     params['start-date'] = (new Date(this.from_epoch*1000)).toISOString().split('T')[0];
     params['end-date']   = (new Date(this.to_epoch*1000  )).toISOString().split('T')[0];
 
-    return '/_google_/get?' + $.map(params, function(v, k) {
-      return v ? k + '=' + v : null;
+    var url = '/_google_/get?' + $.map(params, function(v, k) {
+      return v ? k + '=' + encodeURIComponent(v) : null;
     }).join('&');
+    return url;
   };
 
   this.link = function(period) {
