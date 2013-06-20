@@ -62,6 +62,7 @@ Dash.Stat.prototype = {
       avg:  sum/len,
       max:  max,
       min:  min,
+      len:  len,
       last: len == 0 ? 'no data' : non_null[len-1]
     };
   },
@@ -127,7 +128,8 @@ Dash.Stat.prototype = {
     avg:  '&mu;', // use avg instead of mean to work with graphite summarize()
     max:  '&uarr;',
     min:  '&darr;',
-    last: '&rarr;'
+    last: '&rarr;',
+    len:  'n'
   },
 
   displaySymbol: function() {
