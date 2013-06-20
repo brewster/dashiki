@@ -26,16 +26,25 @@ Dash.Stat.prototype = {
     var totals = [];
     series.forEach(function(metric) {
       metric.data.forEach(function(point, i) {
-        if ( point.y === null ) { // must preserve null values and not let them get cast to zero
-          (typeof totals[i] == 'undefined') && (totals[i] = null); // init total w/null
-        } else {
-          totals[i] = (totals[i] || 0) + point.y;
+        if ( point.y === null ) {
+          totals[i] = null;     // flag that a datapoint at this timeslot was null
+        }
+        else if ( totals[i] === null ) {
+          // this timeslot has been invalidated by a null datapoint in one or more metrics
+          // so skip it
+        }
+        else if ( typeof totals[i] == 'undefined' ) {
+          totals[i] = point.y;  // initialize counter
+        }
+        else {
+          totals[i] += point.y; // running total
         }
       });
     });
 
+
     if ( this.aggregate == 'mean' || this.aggregate == 'avg' ) {
-      var len = totals.length;
+      var len = series.length;
       return totals.map(function(x) { return x/len });
     } else {
       return totals;
