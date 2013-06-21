@@ -32,6 +32,20 @@ Dash.grep = function(array, fn) {
   return data;
 };
 
+// return last [count] element(s) of array as string
+// string arg will be split on '.' to help working with metrics
+Dash.last = function(array, count) {
+  if ( typeof array == 'string' ) {
+    array = array.split('.');
+  }
+
+  if ( count === undefined ) {
+    count = 1;
+  }
+  
+  return array.slice(0 - count).join();
+}
+
 // wrapper on jQuery.ajax() that allows proxy
 Dash.ajax = function(request, proxy) {
   if ( proxy ) {
