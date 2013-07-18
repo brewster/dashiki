@@ -90,3 +90,8 @@ Dash.Format.Microseconds = function(us) {
     return '0';
   }
 };
+
+// append a '%' to a reasonably-formatted number
+Dash.Format.Percentage = function(x) {
+  return (typeof x === 'number') ? x.toFixed(0) + '%' : x;
+}
