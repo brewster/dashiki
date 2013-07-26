@@ -1,15 +1,17 @@
 # Dashiki
 
-What does it do?
+## What does it do?
 
-* dashiki allows you to build dashboards that surface data from graphite,
-  ganglia and other sources of time series data.
+Dashiki allows you to build dashboards that surface data from graphite,
+ganglia and other sources of time series data.
 
 ## How do I run it?
 
-    bundle install
-    ln -s cfg-examples cfg
-    rackup
+```sh
+bundle install
+ln -s cfg-examples cfg
+rackup
+```
 
 ## What's it look like?
 
@@ -17,7 +19,10 @@ What does it do?
 
 ## Configuration
 
-* configuration files should like under cfg/. See examples in cfg-examples
+Configuration files should like under `cfg/`. See examples in `cfg-examples`.
+
+Please see the [wiki](/wiki) for much more comprehensive documentation
+on configuration for the various sources.
 
 ### Simple configuration
 
