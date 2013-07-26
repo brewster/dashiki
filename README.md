@@ -21,8 +21,9 @@ rackup
 
 Configuration files should like under `cfg/`. See examples in `cfg-examples`.
 
-Please see the [wiki](/wiki) for much more comprehensive documentation
-on configuration for the various sources.
+Please see the [wiki](https://github.com/rlister/dashiki/wiki) for
+much more comprehensive documentation on configuration for the various
+sources.
 
 ### Simple configuration
 
