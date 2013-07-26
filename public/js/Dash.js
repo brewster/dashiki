@@ -43,7 +43,7 @@ Dash.last = function(array, count) {
     count = 1;
   }
   
-  return array.slice(0 - count).join();
+  return array.slice(0 - count).join(' ');
 }
 
 // wrapper on jQuery.ajax() that allows proxy
