@@ -48,7 +48,8 @@ Dash.Source.Graphite.find = function(cfg, callback) {
         dataType: 'json'
       };
 
-  return Dash.ajax(request)
+  // proxy here allows find({proxy: true})
+  return Dash.ajax(request, cfg.proxy)
     .done(function(data) {
       var metrics = data.metrics.filter(function(metric) {
         return metric.is_leaf == 1;
