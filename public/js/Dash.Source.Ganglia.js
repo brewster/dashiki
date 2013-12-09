@@ -41,3 +41,28 @@ Dash.Source.Ganglia.prototype = {
   }
 
 };
+
+// filter to use in your metrics to use num of cpus in load report
+// to convert the total load to a ratio, where ratio of 1 means actual
+// loadavg is same as total cpus
+Dash.Source.Ganglia.convertLoadReportToRatio = function(data) {
+  return [{
+    metric_name: 'load_ratio',
+    datapoints: data[0].datapoints.map(function(x, i) {
+      var num_cpus = data[2].datapoints[i][0];
+      // last cpu value can be zero, do not divide by this or the universe will end
+      var ratio = (num_cpus === 0) ? 0 : x[0]/num_cpus;
+      return [ ratio, x[1] ];
+    })
+  }];
+};
+
+// filter to skip 'Total' mem (last metric)
+Dash.Source.Ganglia.skipTotalMetric = function(data) {
+  return data.slice(0,4);
+};
+
+// filter to skip 'Idle' metric for cpu report
+Dash.Source.Ganglia.removeIdleMetric = function(data) {
+  return data.slice(0,3);
+};
