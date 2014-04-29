@@ -12,7 +12,7 @@ Dash.Source.Opscenter = function(stat) {
   var stub = stat.source + target.replace(/^\/*/, '/') + '?' + params.join('&');
 
   this.url = function(period) {
-    return stub + "&start=" + period.start.getTime()/1000;
+    return stub + "&start=" + Math.round(period.start.getTime()/1000);
   };
 
   this.link = function(period) {
@@ -51,7 +51,7 @@ Dash.Source.Opscenter.prototype = {
       if ( dataset.hasOwnProperty(metric) ) {
         metrics.push({
           name: metric,
-          data: dataset[metric].map(function(point) {
+          data: dataset[metric].filter(function(point) { return point[0] && point[1]; }).map(function(point) {
             return { x: point[0], y: point[1] };
           })
         });
