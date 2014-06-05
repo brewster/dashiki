@@ -67,13 +67,14 @@ Dash.Format.Milliseconds = function(ms) {
 
 Dash.Format.AccurateMilliseconds = function(ms) {
   if (typeof ms !== 'number') {
-     return ms;
+    debugger;
+    return ms;
   }
 
   var sec = Math.floor(ms/1000), msec = Math.round(ms%1000),
       min = Math.floor(sec/60),  sec  = Math.round(sec%60),
       hr  = Math.floor(min/60),  min  = min%60;
-
+  debugger;
   if (hr > 0) {
     return hr + 'h ' + min + 'm';
   } else if (min > 0) {
