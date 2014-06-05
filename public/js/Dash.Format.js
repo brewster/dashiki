@@ -73,13 +73,13 @@ Dash.Format.AccurateMilliseconds = function(ms) {
   var sec = Math.floor(ms/1000), msec = Math.round(ms%1000),
       min = Math.floor(sec/60),  sec  = Math.round(sec%60),
       hr  = Math.floor(min/60),  min  = min%60;
-      
+
   if (hr > 0) {
     return hr + 'h ' + min + 'm';
   } else if (min > 0) {
     return min + 'm ' + sec + 's';
   } else if (sec > 0) {
-    return sec + 's ' + msec + 'ms';
+    return sec + 's ';
   } else if (msec > 0) {
     return msec + 'ms';
   } else {
