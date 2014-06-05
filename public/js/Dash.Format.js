@@ -65,6 +65,28 @@ Dash.Format.Milliseconds = function(ms) {
   }
 };
 
+Dash.Format.AccurateMilliseconds = function(ms) {
+  if (typeof ms !== 'number') {
+     return ms;
+  }
+
+  var sec = Math.floor(ms/1000), msec = Math.round(ms%1000),
+      min = Math.floor(sec/60),  sec  = Math.round(sec%60),
+      hr  = Math.floor(min/60),  min  = min%60;
+
+  if (hr > 0) {
+    return hr + 'h ' + min + 'm';
+  } else if (min > 0) {
+    return min + 'm ' + sec + 's';
+  } else if (sec > 0) {
+    return sec + 's ' + msec + 'ms';
+  } else if (msec > 0) {
+    return msec + 'ms';
+  } else {
+    return '0';
+  }
+};
+
 // convert microsec to nearest whole units
 Dash.Format.Microseconds = function(us) {
   if (typeof us !== 'number') {
