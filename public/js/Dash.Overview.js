@@ -65,7 +65,7 @@ Dash.Overview.prototype = {
     project.title.hide(); // hide title, will re-show below if any stats match
 
     project.stats.forEach(function(stat) {
-      stat.update(self.from, function() {
+      stat.update(self, function() {
         if ( self.intersects(stat.classes) ) {
           project.title.show();
           project.row.append(self.createBox(stat));
