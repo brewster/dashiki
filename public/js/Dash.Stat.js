@@ -43,12 +43,7 @@ Dash.Stat.prototype = {
     });
 
 
-    if ( this.aggregate == 'mean' || this.aggregate == 'avg' ) {
-      var len = series.length;
-      return totals.map(function(x) { return x/len });
-    } else {
-      return totals;
-    }
+    return totals;
   },
 
   // calculate stats like sum, mean, max, min
