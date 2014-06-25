@@ -11,11 +11,6 @@ Dash.Stat = function(cfg) {
     }
   }
 
-  // synonym for backward-compat and user-friendliness
-  if ( this.display == 'mean' ) {
-    this.display = 'avg';
-  }
-  
   return this;
 }
 
