@@ -2,7 +2,7 @@ Dash.namespace('Source.Graphite');
 
 Dash.Source.Graphite = function(stat) {
   var stub = stat.source + "/render?target=";
-
+  
   // choose a sane resolution by period length
   this.stepSize = function(length) {
     var step;
@@ -19,17 +19,17 @@ Dash.Source.Graphite = function(stat) {
     }
     return step;
   };
-
+  
   // return graphite function call to bucket data appropriately for period
-  this.hitcount = function(length) {
-    var func = 'hitcount(' + stat.target + ',"' +
+  this.summarize = function(length) {
+    var func = 'summarize(' + stat.target + ',"' +
       this.stepSize(length)  + '","' + stat.display + '")';
     return encodeURI(func);
   };
-
+  
   // how to get data
   this.url = function(period) {
-    return stub + this.hitcount(period.length) + "&from=" + period.from + "&format=json";
+    return stub + this.summarize(period.length) + "&from=" + period.from + "&format=json";
   };
 
   // link to the original data source
