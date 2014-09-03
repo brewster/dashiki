@@ -49,20 +49,22 @@ Dash.Stat.prototype = {
       return value !== null;
     });
 
+    var len = non_null.length;
+    var last = len == 0 ? 'no data' : non_null[len-1]
+
     non_null.forEach(function(value) {
       sum += value;
-      max  = Math.max(max, value);
-      min  = min ? Math.min(min, value) : value; // handle first value
     });
 
-    var len = non_null.length;
+    non_null.sort()
     return {
       sum:  sum,
       avg:  sum/len,
-      max:  max,
-      min:  min,
+      med:  len == 0 ? 'no data' : non_null[len/2],
+      max:  len == 0 ? 'no data' : non_null[len - 1],
+      min:  len == 0 ? 'no data' : non_null[0],
       len:  len,
-      last: len == 0 ? 'no data' : non_null[len-1]
+      last: last
     };
   },
 
