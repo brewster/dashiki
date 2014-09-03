@@ -60,7 +60,7 @@ Dash.Stat.prototype = {
     return {
       sum:  sum,
       avg:  sum/len,
-      med:  len == 0 ? 'no data' : non_null[len/2],
+      med:  len == 0 ? 'no data' : non_null[Math.floor(len/2)],
       max:  len == 0 ? 'no data' : non_null[len - 1],
       min:  len == 0 ? 'no data' : non_null[0],
       len:  len,
