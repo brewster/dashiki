@@ -20,10 +20,20 @@ Dash.Source.Graphite = function(stat) {
     return step;
   };
   
+  this.summarizeFunc = function(display) {
+    var func;
+    if ( display == "med" ) {
+      func = "last";
+    } else {
+      func = display;
+    }
+    return func
+  };
+
   // return graphite function call to bucket data appropriately for period
   this.summarize = function(length) {
     var func = 'summarize(' + stat.target + ',"' +
-      this.stepSize(length)  + '","' + stat.display + '")';
+      this.stepSize(length)  + '","' + this.summarizeFunc(stat.display) + '")';
     return encodeURI(func);
   };
   
