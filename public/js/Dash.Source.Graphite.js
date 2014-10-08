@@ -2,7 +2,7 @@ Dash.namespace('Source.Graphite');
 
 Dash.Source.Graphite = function(stat) {
   var stub = stat.source + "/render?target=";
-  
+
   // choose a sane resolution by period length
   this.stepSize = function(length) {
     var step;
@@ -19,7 +19,7 @@ Dash.Source.Graphite = function(stat) {
     }
     return step;
   };
-  
+
   this.summarizeFunc = function(display) {
     var func;
     if ( display == "med" ) {
@@ -36,10 +36,10 @@ Dash.Source.Graphite = function(stat) {
       this.stepSize(length)  + '","' + this.summarizeFunc(stat.display) + '")';
     return encodeURI(func);
   };
-  
+
   // how to get data
   this.url = function(period) {
-    return stub + this.summarize(period.length) + "&from=" + period.from + "&format=json";
+    return stub + this.summarize(period.length) + "&noCache=true&from=" + period.from + "&format=json";
   };
 
   // link to the original data source
