@@ -39,7 +39,13 @@ Dash.Source.Graphite = function(stat) {
 
   // how to get data
   this.url = function(period) {
-    return stub + this.summarize(period.length) + "&noCache=true&from=" + period.from + "&format=json";
+    if (stat.no_summarize) {
+      full_target = encodeURI(stat.target)
+    } else {
+      full_target = this.summarize(period.length)
+    }
+
+    return stub + full_target + "&noCache=true&from=" + period.from + "&format=json";
   };
 
   // link to the original data source
